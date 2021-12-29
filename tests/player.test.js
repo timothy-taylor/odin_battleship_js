@@ -21,9 +21,9 @@ test('attack => true when hit successful', () => {
 test('attack => false if coordinates have already been used', () => {
   enemy.getBoard().placeShip(range,range.length);
   player.attack(enemy,range[1]);
-  expect(player.attack(enemy,range[1])).toStrictEqual([false,false]);
+  expect(player.attack(enemy,range[1])).toStrictEqual([false,undefined]);
 });
 
 test('randAttack => does a legal/random attack', () => {
-  expect(enemy.rndAttack(player)[0]).toBe(true);
+  expect(enemy.rndAttack(player)[0][0]).toBe(true);
 });

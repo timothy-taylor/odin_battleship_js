@@ -1,3 +1,5 @@
+import * as Icons from './icons.js';
+
 const COLORS = [
   "lightsalmon",
   "cadetblue",

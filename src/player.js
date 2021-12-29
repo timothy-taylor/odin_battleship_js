@@ -19,7 +19,8 @@ const playerFactory = () => {
   const attack = (e, c) => e.getBoard().receiveAttack(c);
   const rndAttack = (e) => {
     const c = rndC();
-    return [attack(e, c)[0] || rndAttack(e), c];
+    
+    return [attack(e, c) || rndAttack(e), c];
   };
 
   return {
