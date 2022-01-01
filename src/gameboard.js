@@ -7,7 +7,7 @@ const gameboardFactory = () => {
     Array.from({ length: 10 }, (_) => ({ id: null, hit: false }))
   );
   const shipList = [];
-  let pieceID = 0;
+  let pieceID = 1;
 
   //
   //
@@ -26,7 +26,7 @@ const gameboardFactory = () => {
    *    true / false   // is the placement legal?
    */
   const placeShip = (c) => {
-    if (c.some((x) => board[x[0]][x[1]].id)) {
+    if (c.some((x) => x.some((e) => e > 9) || board[x[0]][x[1]].id)) {
       return false;
     } else {
       const ship = shipFactory(c.length, pieceID++);
@@ -45,7 +45,7 @@ const gameboardFactory = () => {
    *    coordinates: [y,x]  // array syntax
    *  return:
    *    [
-   *      true / false ,    // is attack is legal?
+   *      true / false ,    // is attack legal?
    *      true / undefined  // is there a shipID?
    *    ]
    */

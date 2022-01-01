@@ -19,6 +19,13 @@ h1 {
   color: dimgray;
 }
 
+h2 {
+  text-align: center;
+  color: dimgray;
+  font-family: serif;
+  font-size: 2em;
+}
+
 .supercontainer {
     display: grid;
     grid-template-columns: auto;
@@ -79,6 +86,25 @@ footer {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalcontent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-align: center;
+  font-size: 2em;
+  color: dimgray;
+  text-decoration: none;
+  margin-bottom: 2em;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 svg {

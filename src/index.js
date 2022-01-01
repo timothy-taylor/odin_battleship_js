@@ -1,30 +1,36 @@
-import gameLoop from "./gameloop.js";
+import gameSetup from "./setupgame.js";
 import playerBoard from "./playerDOM.js";
 import enemyBoard from "./enemyDOM.js";
 import * as Icons from "./icons.js";
 import "./style.css";
 
-const [player, enemy] = gameLoop();
+const [PLAYER, ENEMY] = gameSetup();
 
 //
 //
 // DOM
+function attackContainer() {
+  const containerOne = document.createElement("DIV");
+  const headerEnemy = document.createElement("H2");
+  headerEnemy.innerHTML = "Attack";
+  containerOne.appendChild(headerEnemy);
+  containerOne.appendChild(enemyBoard(ENEMY));
+  return containerOne;
+}
+
+function defendContainer() {
+  const containerTwo = document.createElement("DIV");
+  const headerPlayer = document.createElement("H2");
+  headerPlayer.innerHTML = "Defend";
+  containerTwo.appendChild(headerPlayer);
+  containerTwo.appendChild(playerBoard(PLAYER));
+  return containerTwo;
+}
+
 const supercontainer = document.createElement("DIV");
 supercontainer.classList.add("supercontainer");
-
-const containerOne = document.createElement("DIV");
-const headerEnemy = document.createElement("H1");
-headerEnemy.innerHTML = "Attack";
-containerOne.appendChild(headerEnemy);
-containerOne.appendChild(enemyBoard(enemy));
-supercontainer.appendChild(containerOne);
-
-const containerTwo = document.createElement("DIV");
-const headerPlayer = document.createElement("H1");
-headerPlayer.innerHTML = "Defend";
-containerTwo.appendChild(headerPlayer);
-containerTwo.appendChild(playerBoard(player));
-supercontainer.appendChild(containerTwo);
+supercontainer.appendChild(attackContainer());
+supercontainer.appendChild(defendContainer());
 
 const footer = document.createElement("FOOTER");
 footer.innerHTML = "TGT 2021";
@@ -42,25 +48,32 @@ const gameOverDOM = (user, bool) => {
   if (user.getBoard().isGameOver()) {
     const modal = document.createElement("DIV");
     modal.classList.add("modal");
+    const content = document.createElement("DIV");
+    content.classList.add("modalcontent");
     const header = document.createElement("H1");
     header.innerHTML = bool ? "Hurray, you win!" : "Sorry, you lose!";
-    modal.appendChild(header);
+    const refresh = document.createElement("A");
+    refresh.href = "javascript:location.reload(true)";
+    refresh.innerHTML = "Play again";
+    content.appendChild(header);
+    content.appendChild(refresh);
+    modal.appendChild(content);
     document.body.appendChild(modal);
   }
 };
 const cpuMoveDOM = () => {
-  const rc = enemy.rndAttack(player);
+  const rc = ENEMY.rndAttack(PLAYER);
   const playerSquare = document.getElementById(rc[1].toString() + "-player");
   playerSquare.innerHTML = Icons.ex;
-  gameOverDOM(player, false);
+  gameOverDOM(PLAYER, false);
 };
 const playerMoveDOM = (e) => {
   if (eI.includes(e.target)) {
     const arr = e.target.id.split(",").map((s) => Number(s));
-    const rc = player.attack(enemy, arr);
+    const rc = PLAYER.attack(ENEMY, arr);
     e.target.style.backgroundColor = rc[1] ? "lightsalmon" : "cornflowerblue";
     e.target.innerHTML = rc[1] ? Icons.hit : Icons.miss;
-    gameOverDOM(enemy, true);
+    gameOverDOM(ENEMY, true);
     cpuMoveDOM();
   }
 };

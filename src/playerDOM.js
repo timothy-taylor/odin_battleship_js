@@ -1,25 +1,23 @@
-import * as Icons from './icons.js';
-
 const COLORS = [
   "lightsalmon",
   "cadetblue",
   "cornflowerblue",
-  "darkcyan",
   "darkseagreen",
   "lightcoral",
   "lightblue",
-  "lightpink",
   "lightslategrey",
+  "plum",
+  "thistle",
+  "olive",
+  "darkcyan",
   "palegreen",
   "pink",
   "powderblue",
   "salmon",
-  "thistle",
-  "plum",
-  "olive",
+  "lightpink",
 ];
 
-export default function(player) {
+export default function (player) {
   const container = document.createElement("DIV");
   container.classList.add("container");
   container.id = "player";
@@ -30,7 +28,7 @@ export default function(player) {
       r.forEach((e, j) => {
         const item = document.createElement("DIV");
         item.classList.add("item");
-        if (e.id || e.id === 0) {
+        if (e.id) {
           item.style.backgroundColor = COLORS[e.id];
         }
         item.id = `${i},${j}-player`;
