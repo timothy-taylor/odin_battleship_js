@@ -6,7 +6,7 @@
       entry: './src/index.js',
       plugins: [
         new HtmlWebpackPlugin({
-          title: 'MyApp',
+          title: 'Battleship',
         }),
         new Dotenv(),
       ],
